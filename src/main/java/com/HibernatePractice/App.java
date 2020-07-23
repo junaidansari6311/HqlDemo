@@ -18,15 +18,17 @@ public class App
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        /*String insertStudent = "insert into Student (Junaid,BE,101,9874561230)"+"(select name, degree, roll, phone from Student)";
+        String insertStudent = "insert into Student (Junaid,BE,101,9874561230)"+"(select name, degree, roll, phone from Student)";
         Query query = session.createQuery(insertStudent);
-        int result = query.executeUpdate();*/
-
-        String hql = "update Student set degree = :degreeName " + "where id = :studentId";
-        Query query = session.createQuery(hql);
-        query.setParameter("degreeName", "BSC");
-        query.setParameter("studentId", 3);
         query.executeUpdate();
+
+        String updateStudent = "update Student s set s.degree = 'BSC' " + "where id = 1";
+        Query query1 = session.createQuery(updateStudent);
+        query1.executeUpdate();
+
+        String deleteStudent = "delete from Student s where id = 5";
+        Query query2 = session.createQuery(deleteStudent);
+        query2.executeUpdate();
 
         transaction.commit();
         session.close();
